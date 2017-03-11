@@ -2,4 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/http-client/v14
+/.vs
+/node_modules
+/coverage/Chrome 56.0.2924 (Windows 7 0.0.0)/html
+*.dat
