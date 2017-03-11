@@ -60,6 +60,7 @@
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="typings.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="example-app\" />

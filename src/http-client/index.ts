@@ -1,37 +1,43 @@
-﻿export class HttpClient {
+﻿interface IRequestOptions {
+    method: any;
+}
+export class HttpClient {
 
-  constructor() { }
+    constructor() { }
 
-  private handleResponse(response: Response): Promise<any> {
-    return response.json();
-  }
+    private handleResponse(response: Response): Promise<any> {
+        return response.json();
+    }
 
-  private handleError() { }
+    private handleError() { }
 
-  private handleServerError(error) {
-    console.log('server error', error)
-  }
+    private handleServerError(error) {
+        console.log('server error', error)
+    }
 
-  private handleSuccess() { }
+    private handleSuccess() { }
 
-  requestOptions(options): Request {
-    return new Request(Object.assign({}, options));
-  }
+    private requestOptions(url: string, method, options?: RequestInit): Request {
+        return new Request(url, Object.assign({}, options, { method: method }));
+    }
 
-  requestHeader(options): Headers {
-    return new Headers({
-      'Content-Type': 'application/json'
-    })
-  }
+    private requestHeaders(options): Headers {
+        return new Headers();
+    }
 
-  get(url: string, requestOptions?): Promise<any> {
-    return fetch(url, {method: 'GET'})
-      .then(this.handleResponse)
-      .catch(this.handleServerError);
-  }
+    get(url: string, requestOptions?: RequestInit): Promise<any> {
+        let request = this.requestOptions(url, 'GET', requestOptions);
+        console.log(request);
+        return fetch(request)
+            .then(this.handleResponse)
+            .catch(this.handleServerError);
+    }
 
-  post() {
-
-  }
+    post(url: string, requestOptions?: RequestInit): Promise<any> {
+        let request = this.requestOptions(url, 'POST', requestOptions);
+        return fetch(request)
+            .then(this.handleResponse)
+            .catch(this.handleServerError);
+    }
 
 }
